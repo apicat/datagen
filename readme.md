@@ -45,7 +45,7 @@ word(zh)
 ```
 
 {
-    "type":"string",
+    "type":"object",
     "properties":{
         "children":{
             "type":"array",
