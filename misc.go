@@ -19,7 +19,7 @@ func Boolean(v ...bool) bool {
 func Float(v ...float64) float64 {
 	switch len(v) {
 	case 0:
-		return grand.Float64()
+		return toFixed(randFloat64(1, 100000), 6)
 	case 1:
 		return v[0]
 	case 2:

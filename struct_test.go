@@ -14,6 +14,7 @@ func TestStruct(t *testing.T) {
 			name    string `datagen:"name"`
 			age     int    `datagen:"integer|10,40"`
 			address string `datagen:"address"`
+			source  float64
 		}
 	}
 	var testt T

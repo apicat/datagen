@@ -108,12 +108,12 @@ func (s *structBuilder) gen(tt reflect.Type, fn string) (any, error) {
 			v = Float()
 		}
 		x := reflect.New(tt)
-		x.SetFloat(v)
+		x.Elem().SetFloat(v)
 		return x.Interface(), nil
 	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
 		v := s.toNumber(fn)
 		x := reflect.New(tt)
-		x.SetUint(uint64(v))
+		x.Elem().SetUint(uint64(v))
 		return x.Interface(), nil
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
 		v := s.toNumber(fn)
