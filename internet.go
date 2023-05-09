@@ -30,11 +30,11 @@ func Email() string {
 	return Regexp(`[a-z0-9]{5,18}@[a-z0-9]{2,5}\.(com|org|net)`)
 }
 
-var httpstatuscodes = []int{
+var httpstatuscodes = []int64{
 	200, 301, 302, 400, 401, 403, 404, 405, 500, 502, 503,
 }
 
-func HTTPCode() int {
+func HTTPCode() int64 {
 	return pick(httpstatuscodes)
 }
 

@@ -21,6 +21,14 @@ func randInt(min, max int) int {
 	return min + grand.Intn(n+1)
 }
 
+func randInt64(min, max int64) int64 {
+	n := max - min
+	if n <= 0 {
+		return min
+	}
+	return min + grand.Int63n(n+1)
+}
+
 // [min,max)
 func randFloat64(min, max float64) float64 {
 	n := max - min

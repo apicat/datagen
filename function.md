@@ -8,7 +8,7 @@
 - [Float](#float)
 - [OneOf](#oneOf)  多选一
 - [Regexp](#regexp)
-- [NumberStringPattern](#numberStringPattern) eg: `(###)-#-##-##` `(851)-4-98-20`
+- [NumberPattern](#numberPattern) eg: `(###)-#-##-##` `(851)-4-98-20`
 
 ### Plus
 - [Typography](#typography) i18n
@@ -24,7 +24,6 @@
     - [IDCard](#idcard) 身份证/ssn
     - [Gender](#gender) 性别
     - [Phone](#phone) 电话/手机
-    - [Email](#email)
 - [Address](#address) i18n
     - [Address](#address) 详细地址包含省市区
     - [ProvinceOrState](#provinceOrState) 省(州/加盟国)
@@ -46,6 +45,7 @@
     - [UUID](#uuid)
     - [URL](#url)
     - [Domain](#domain)
+    - [Email](#email)
 - [Draw](#draw)
     - [ImageURL](#imageurl)
     - [ImageData](#imagedata)

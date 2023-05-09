@@ -29,14 +29,14 @@ func Float(v ...float64) float64 {
 	}
 }
 
-func Integer(v ...int) int {
+func Integer(v ...int64) int64 {
 	switch len(v) {
 	case 0:
-		return grand.Int()
+		return int64(grand.Int31())
 	case 1:
 		return v[0]
 	default:
-		return randInt(v[0], v[len(v)-1])
+		return randInt64(v[0], v[len(v)-1])
 	}
 }
 

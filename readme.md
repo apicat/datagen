@@ -57,7 +57,26 @@ word(zh)
     }
 }
 
+
+JSONSchemaGen(jsonschemaString, &GenOption{DatagenKey: "x-datagen"})
+
 ```
+
+### struct 生成数据
+```
+type T struct {
+    values map[string]string
+    uid    string `datagen:"uuid"`
+    info   struct {
+        name    string `datagen:"name"`
+        age     int    `datagen:"integer|10,40"`
+        address string `datagen:"address"`
+    }
+}
+var testt T
+StructGen(testt, &GenOption{DatagenKey: "datagen"})
+```
+
 
 ### 添加自己专用的函数
 

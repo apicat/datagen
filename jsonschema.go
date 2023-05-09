@@ -6,23 +6,13 @@ import (
 	"strconv"
 )
 
-type JSONSchemaOption struct {
-	Datagen   string
-	SkipError bool
-	// json/xml defaut json
-	// OutputFormat string
-}
-
-func JSONSchemaGen(data []byte, opt *JSONSchemaOption) ([]byte, error) {
+func JSONSchemaGen(data []byte, opt *GenOption) ([]byte, error) {
 	if opt == nil {
-		opt = &JSONSchemaOption{}
-	}
-	if opt.Datagen == "" {
-		opt.Datagen = "x-datagen"
+		opt = createGenOption("datagen")
 	}
 	b := &jsonschemaBuilder{
 		src: data,
-		opt: *opt,
+		opt: opt,
 	}
 	var obj JSchema
 	if err := json.Unmarshal(data, &obj); err != nil {
@@ -37,7 +27,7 @@ func JSONSchemaGen(data []byte, opt *JSONSchemaOption) ([]byte, error) {
 
 type jsonschemaBuilder struct {
 	src []byte
-	opt JSONSchemaOption
+	opt *GenOption
 }
 
 func (j *jsonschemaBuilder) gen(obj JSchema) (any, error) {
@@ -87,7 +77,7 @@ func (j *jsonschemaBuilder) gen(obj JSchema) (any, error) {
 type JSchema map[string]json.RawMessage
 
 func (j *jsonschemaBuilder) toString(obj JSchema) (any, error) {
-	if raw, ok := obj[j.opt.Datagen]; ok {
+	if raw, ok := obj[j.opt.DatagenKey]; ok {
 		// 强制转化格式 避免结果不是string
 		return fmt.Sprintf("%v", CallFunction(j.rawString(raw))), nil
 	}
@@ -98,7 +88,7 @@ func (j *jsonschemaBuilder) toString(obj JSchema) (any, error) {
 		return j.stringFormat(j.rawString(raw)), nil
 	}
 	min, max := j.rangeint(obj, 5, 20, "minLength", "maxLength")
-	return String("ansic", min, max), nil
+	return String("ansic", int(min), int(max)), nil
 }
 
 func (j *jsonschemaBuilder) stringFormat(format string) string {
@@ -140,7 +130,7 @@ func (j *jsonschemaBuilder) rawString(b json.RawMessage) string {
 }
 
 func (j *jsonschemaBuilder) toNumber(obj JSchema, typ string) (any, error) {
-	if raw, ok := obj[j.opt.Datagen]; ok {
+	if raw, ok := obj[j.opt.DatagenKey]; ok {
 		v := CallFunction(j.rawString(raw))
 		switch x := v.(type) {
 		case int, int64:
@@ -209,8 +199,8 @@ func (j *jsonschemaBuilder) toArray(obj JSchema) (any, error) {
 		}
 	}
 	min, max := j.rangeint(obj, 3, 10, "minItems", "maxItems")
-	n := randInt(min, max)
-	for i := 0; i < n; i++ {
+	n := randInt64(min, max)
+	for i := 0; i < int(n); i++ {
 		v, err := j.gen(items)
 		if err != nil {
 			if j.opt.SkipError {
@@ -223,7 +213,7 @@ func (j *jsonschemaBuilder) toArray(obj JSchema) (any, error) {
 	return x, nil
 }
 
-func (j *jsonschemaBuilder) rangeint(src JSchema, defaultmin, defaultmax int, minkey, maxkey string) (int, int) {
+func (j *jsonschemaBuilder) rangeint(src JSchema, defaultmin, defaultmax int64, minkey, maxkey string) (int64, int64) {
 	min, max := defaultmin, defaultmax
 	if raw, ok := src[minkey]; ok {
 		json.Unmarshal(raw, &min) // nolint:errcheck

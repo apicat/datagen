@@ -30,7 +30,7 @@ func init() {
 	functions = map[string]FuncHandler{
 		"string":             func(p Param) any { return String(p.Args.At(0), p.Args.SliceInt(1)...) },
 		"boolean":            func(p Param) any { return Boolean(p.Args.SliceBool()...) },
-		"intger":             func(p Param) any { return Integer(p.Args.SliceInt()...) },
+		"integer":            func(p Param) any { return Integer(p.Args.SliceInt64()...) },
 		"float":              func(p Param) any { return Float(p.Args.SliceFloat()...) },
 		"regexp":             func(p Param) any { return Regexp(p.Args.At(0)) },
 		"oneof":              func(p Param) any { return OneOf(p.Args.SliceAny()...) },
@@ -207,6 +207,16 @@ func (a Args) SliceInt(i ...int) []int {
 	list := make([]int, len(s))
 	for k := range s {
 		list[k] = s.Int(k)
+	}
+	return list
+}
+
+func (a Args) SliceInt64(i ...int) []int64 {
+	s := a.Sub(i...)
+	list := make([]int64, len(s))
+	for k := range s {
+		v, _ := strconv.ParseInt(s[k], 10, 64)
+		list[k] = v
 	}
 	return list
 }

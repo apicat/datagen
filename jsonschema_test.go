@@ -34,7 +34,7 @@ func TestJSONSchema(t *testing.T) {
 		}
 	}`
 
-	b, err := JSONSchemaGen([]byte(src), &JSONSchemaOption{})
+	b, err := JSONSchemaGen([]byte(src), &GenOption{DatagenKey: "x-mock"})
 	if err != nil {
 		fmt.Println(err)
 		t.FailNow()
