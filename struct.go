@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"reflect"
 	"strconv"
+	"strings"
 )
 
 type GenOption struct {
@@ -30,6 +31,9 @@ func StructGen(v any, opt *GenOption) ([]byte, error) {
 	t := reflect.TypeOf(v)
 	if t.Kind() == reflect.Pointer {
 		t = t.Elem()
+	}
+	if t.Kind() != reflect.Struct {
+		return nil, fmt.Errorf("the value must be a struct")
 	}
 	result, err := b.gen(t, "")
 	if err != nil {
@@ -66,6 +70,15 @@ func (s *structBuilder) toNumber(fn string) int64 {
 		v = Integer()
 	}
 	return v
+}
+
+func (s *structBuilder) tagName(field reflect.StructField) string {
+	v := field.Tag.Get("json")
+	ps := strings.Split(v, ",")
+	if ps[0] != "" {
+		return ps[0]
+	}
+	return field.Name
 }
 
 func (s *structBuilder) gen(tt reflect.Type, fn string) (any, error) {
@@ -154,14 +167,14 @@ func (s *structBuilder) gen(tt reflect.Type, fn string) (any, error) {
 					if err != nil && !s.opt.SkipError {
 						return nil, err
 					}
-					list[ano.Name] = a
+					list[s.tagName(ano)] = a
 				}
 			} else {
 				a, err := s.gen(v.Type, v.Tag.Get(s.opt.DatagenKey))
 				if err != nil && !s.opt.SkipError {
 					return nil, err
 				}
-				list[v.Name] = a
+				list[s.tagName(v)] = a
 			}
 		}
 		return list, nil
