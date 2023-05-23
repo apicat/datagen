@@ -8,13 +8,13 @@ import (
 func TestStruct(t *testing.T) {
 
 	type T struct {
-		values map[string]string
-		uid    string `datagen:"uuid"`
-		info   struct {
-			name    string `datagen:"name"`
-			age     int    `datagen:"integer|10,40"`
-			address string `datagen:"address"`
-			source  float64
+		Values map[string]string
+		Uid    string `datagen:"uuid"`
+		Info   struct {
+			Name    string `datagen:"name"`
+			Age     int    `datagen:"integer|10,40"`
+			Address string `datagen:"address"`
+			Source  float64
 		}
 	}
 	var testt T
