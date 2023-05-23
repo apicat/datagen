@@ -33,7 +33,7 @@ numberpattern|###-####
 float|10,20
 word(zh)
 ```
-
+[所有字符串规则](function_str.md)
 
 
 ### jsonschema 生成数据

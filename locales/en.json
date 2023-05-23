@@ -6,8 +6,8 @@
     "sentenceEnd": "."
   },
   "people": {
-    "phone": "##########",
-    "idNumber": "#########",
+    "phone": "###-###-####",
+    "idNumber": "###-##-####",
     "gender":["female","male"],
     "name": {
       "first": [
