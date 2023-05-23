@@ -5,7 +5,7 @@
 
 语法
 ```
-string|{type},{minlength},{maxlength}
+string|{type?},{minlength?},{maxlength?}
 ```
 
 参数
@@ -30,7 +30,7 @@ string|letter,10,20  // 长度为10-20的小写字母
 
 语法
 ```
-boolean|{value}...
+boolean|{value?}...
 ```
 
 参数
@@ -49,7 +49,7 @@ boolean|true,false,false,false  // 随机从[true,false,false,false]中取值
 
 语法
 ```
-integer|{min},{max}
+integer|{min?},{max?}
 ```
 
 参数
@@ -68,7 +68,7 @@ integer|10000,20000  // 13886
 
 语法
 ```
-float|{min},{max},{fixed}
+float|{min?},{max?},{fixed?}
 ```
 
 参数
@@ -80,7 +80,7 @@ float|{min},{max},{fixed}
 ```
 float // 随机一个浮点数
 float|102.01 // 102.01
-float|10000,20000,4  // 13886.0021
+float|10000,20000,4  // 13886.1021
 ```
 
 ## regexp
@@ -93,7 +93,7 @@ regexp|{value}
 
 示例
 ```
-regexp|\d{10}
+regexp|\d{10} // 2102301024
 ```
 
 ## oneof
@@ -101,12 +101,13 @@ regexp|\d{10}
 
 语法
 ```
-oneof|value1,value2,value3,...
+oneof|{value?}...
 ```
 
 示例
 ```
-oneof|男,女
+oneof|男,女 // 女
+oneof|1,"a b",a,b // b
 ```
 
 ## numberpattern
@@ -122,15 +123,16 @@ numberpattern|{pattern}
 numberpattern|###-######-#  // 231-200312-1
 ```
 
-## word, phrase, sentence, paragraph
-单词，短语，句子，段落 支持国际化
+## word, phrase, sentence, paragraph,title
+单词，短语，句子，段落,标题   支持国际化
 
 语法
 ```
-word(lang?)|{minlength,maxlength}
-phrase(lang?)|{minlength,maxlength}
-sentence(lang?)|{minlength,maxlength}
-paragraph(lang?)|{minlength,maxlength}
+word(lang?)|{minlength?),{maxlength?}
+phrase(lang?)|{minlength?},{maxlength?}
+sentence(lang?)|{minlength?},{maxlength?}
+paragraph(lang?)|{minlength?},{maxlength?}
+title(lang?)|{minlength?},{maxlength?}
 ```
 
 参数
@@ -147,6 +149,7 @@ word|3  // abc
 word(zh)|3  // 我爱你
 word|3,5 // abcd
 sentence(zh) // 这是一个中文句子。
+title // Zcpk Wxtxnsa Lorn Gzfls Utegn Mrp
 ```
 
 
