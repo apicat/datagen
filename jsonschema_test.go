@@ -24,7 +24,8 @@ func TestJSONSchema(t *testing.T) {
 			"books":{
 				"type":"array",
 				"items":{
-					"type":"number"
+					"type":"integer",
+					"x-mock":"autoincrement|100,2"
 				}
 			},
 			"createdAt":{

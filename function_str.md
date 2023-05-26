@@ -110,6 +110,24 @@ oneof|男,女 // 女
 oneof|1,"a b",a,b // b
 ```
 
+## autoincrement
+自增 仅在jsonschema，struct等模式下可用
+
+语法
+```
+autoincrement|{begin?},{step?}
+```
+
+- **begin** `int` 起始值 默认 1
+- **step** `int` 步长 默认 1
+
+示例
+```
+autoincrement // 1,2,3,4,5...
+autoincrement|100 // 100,101,102,...
+autoincrement|100,2 // 100, 102,104,106...
+```
+
 ## numberpattern
 使用#替代数字
 

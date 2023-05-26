@@ -64,3 +64,21 @@ func NumberPattern(p string) string {
 	}
 	return string(bs)
 }
+
+// 自增 不能单独使用 需配合有迭代器的对象 如struct，jsonschema
+// 返回步长
+func autoIncrement(v ...int64) autoIncrementData {
+	switch len(v) {
+	case 0:
+		return autoIncrementData{begin: 1, step: 1}
+	case 1:
+		return autoIncrementData{begin: v[0], step: 1}
+	default:
+		return autoIncrementData{begin: v[0], step: v[1]}
+	}
+}
+
+type autoIncrementData struct {
+	begin int64
+	step  int64
+}

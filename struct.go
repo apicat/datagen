@@ -44,6 +44,7 @@ func StructGen(v any, opt *GenOption) ([]byte, error) {
 
 type structBuilder struct {
 	opt *GenOption
+	seq int64
 }
 
 func (s *structBuilder) toNumber(fn string) int64 {
@@ -59,6 +60,10 @@ func (s *structBuilder) toNumber(fn string) int64 {
 				if x {
 					v = 1
 				}
+			case autoIncrementData:
+				i := x.begin + s.seq
+				s.seq += x.step
+				return i
 			default:
 				pv, err := strconv.ParseInt(fmt.Sprintf("%v", ret), 10, 64)
 				if err == nil {

@@ -28,6 +28,7 @@ func JSONSchemaGen(data []byte, opt *GenOption) ([]byte, error) {
 type jsonschemaBuilder struct {
 	src []byte
 	opt *GenOption
+	seq int64
 }
 
 func (j *jsonschemaBuilder) gen(obj JSchema) (any, error) {
@@ -149,6 +150,10 @@ func (j *jsonschemaBuilder) toNumber(obj JSchema, typ string) (any, error) {
 					return ret, nil
 				}
 			}
+		case autoIncrementData:
+			i := x.begin + j.seq
+			j.seq += x.step
+			return i, nil
 		}
 	}
 	min, max := j.rangeint(obj, 10, 100000, "minimum", "maximum")

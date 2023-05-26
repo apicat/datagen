@@ -34,6 +34,7 @@ func init() {
 		"float":              func(p Param) any { return Float(p.Args.SliceFloat()...) },
 		"regexp":             func(p Param) any { return Regexp(p.Args.At(0)) },
 		"oneof":              func(p Param) any { return OneOf(p.Args.SliceAny()...) },
+		"autoincrement":      func(p Param) any { return autoIncrement(p.Args.SliceInt64()...) },
 		"numberpattern":      func(p Param) any { return NumberPattern(p.Args.At(0)) },
 		"word":               func(p Param) any { return Typography(p.Loc...).Word(p.Args.SliceInt()...) },
 		"title":              func(p Param) any { return Typography(p.Loc...).Title(p.Args.SliceInt()...) },
