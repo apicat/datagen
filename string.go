@@ -20,8 +20,10 @@ func String(model string, n ...int) string {
 		return Regexp(fmt.Sprintf(`[A-Z]{%d}`, x))
 	case "letter":
 		return Regexp(fmt.Sprintf(`[a-z]{%d}`, x))
+	case "ansic":
+		return Regexp(fmt.Sprintf(`[a-zA-Z0-9_\-@\*]{%d}`, x))
 	}
-	return Regexp(fmt.Sprintf(`[a-zA-Z0-9_\-@\*]{%d}`, x))
+	return Regexp(fmt.Sprintf(`[a-zA-Z0-9]{%d}`, x))
 }
 
 type TypographyObject struct {

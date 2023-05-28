@@ -9,10 +9,11 @@ string|{type?},{minlength?},{maxlength?}
 ```
 
 参数
-- **type** `string` 字符串类型
+- **type** `string` 字符串类型 默认[a-zA-Z0-9]
   * upper 大写
   * letter 小写
-  * ansic (default) 默认ansic 包含一些特殊符号
+  * ansic 大小写字母数字以及一些特殊符号
+
 - **minlength** `int` 最小长度
 - **maxlength** `int` 最大长度
 
@@ -289,9 +290,10 @@ time|HH:mm:ss  // 12:00:00
 datetime|{format?}
 ```
 
+ - **format** 默认格式 RFC3339
 示例
 ```
-datetime // 2022-01-02 13:00:32
+datetime // 2006-01-02T15:04:05Z07:00
 datetime|"YYYY年MM月dd日 HH:mm" // 2020年01月20日 12:00
 ```
 
@@ -311,7 +313,7 @@ now|{format?}
 
 示例
 ```
-now // 2022-05-22 13:00:32
+now // 2006-01-02T15:04:05Z07:00
 now|"YYYY年MM月dd日 HH:mm:ss"  // 2022年05月22日 13:00:32
 ```
 
