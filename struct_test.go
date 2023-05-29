@@ -22,6 +22,6 @@ func TestStruct(t *testing.T) {
 	if err != nil {
 		t.FailNow()
 	}
-	fmt.Println(string(b))
+	fmt.Printf("%+v\n", b)
 
 }

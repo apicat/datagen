@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func JSONSchemaGen(data []byte, opt *GenOption) ([]byte, error) {
+func JSONSchemaGen(data []byte, opt *GenOption) (any, error) {
 	if opt == nil {
 		opt = createGenOption("datagen")
 	}
@@ -18,11 +18,7 @@ func JSONSchemaGen(data []byte, opt *GenOption) ([]byte, error) {
 	if err := json.Unmarshal(data, &obj); err != nil {
 		return nil, err
 	}
-	result, err := b.gen(obj)
-	if err != nil {
-		return nil, err
-	}
-	return json.Marshal(result)
+	return b.gen(obj)
 }
 
 type jsonschemaBuilder struct {

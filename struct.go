@@ -1,7 +1,6 @@
 package datagen
 
 import (
-	"encoding/json"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -21,7 +20,7 @@ func createGenOption(key string) *GenOption {
 	}
 }
 
-func StructGen(v any, opt *GenOption) ([]byte, error) {
+func StructGen(v any, opt *GenOption) (any, error) {
 	if opt == nil {
 		opt = createGenOption("datagen")
 	}
@@ -35,11 +34,7 @@ func StructGen(v any, opt *GenOption) ([]byte, error) {
 	if t.Kind() != reflect.Struct {
 		return nil, fmt.Errorf("the value must be a struct")
 	}
-	result, err := b.gen(t, "")
-	if err != nil {
-		return nil, err
-	}
-	return json.Marshal(result)
+	return b.gen(t, "")
 }
 
 type structBuilder struct {
