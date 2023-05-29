@@ -15,6 +15,11 @@ func ProvinceorState(local ...string) string {
 	return GetLocale(local...).Address.Region.RandomStateOrProvince()
 }
 
+// ProvinceorStateCity 省市
+func ProvinceorStateCity(local ...string) string {
+	return GetLocale(local...).Address.Region.RandomString()
+}
+
 // ZipCode 生成邮编
 func ZipCode(local ...string) string {
 	return NumberPattern(GetLocale(local...).Address.ZipCode)

@@ -417,6 +417,21 @@ provinceorstate // California
 provinceorstate(zh) // 陕西省
 ```
 
+
+## provinceorstate&city
+省/邦/州 市
+
+格式
+```
+provinceorstate&city(lang?)
+```
+
+示例
+```
+provinceorstate&city // Ogden, Utah
+provinceorstate&city(zh) // 陕西省 西安市
+```
+
 ## street
 街道
 

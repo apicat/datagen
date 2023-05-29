@@ -53,6 +53,7 @@ func TestAddress(t *testing.T) {
 	fmt.Println(Address("zh"))
 	fmt.Println(ZipCode())
 	fmt.Println(ZipCode("zh"))
+	fmt.Println(ProvinceorStateCity("zh"))
 }
 
 func TestTime(t *testing.T) {

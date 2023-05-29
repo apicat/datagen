@@ -117,9 +117,9 @@ func (j *jsonschemaBuilder) stringFormat(format string) string {
 	case "uri":
 		return URL()
 	case "uri-reference":
-		return URL() + "#" + String("ansic", 3, 5)
+		return URL() + "#" + String("default", 3, 5)
 	}
-	return String("ansic", 6, 10)
+	return String("default", 6, 10)
 }
 
 func (j *jsonschemaBuilder) rawString(b json.RawMessage) string {
@@ -205,6 +205,12 @@ func (j *jsonschemaBuilder) toArray(obj JSchema) (any, error) {
 	}
 	min, max := j.rangeint(obj, 3, 10, "minItems", "maxItems")
 	n := randInt64(min, max)
+	if n < 0 {
+		n = 5
+	}
+	if n > 100 {
+		n = 100
+	}
 	for i := 0; i < int(n); i++ {
 		v, err := j.gen(items)
 		if err != nil {
