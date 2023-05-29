@@ -176,6 +176,9 @@ func (j *jsonschemaBuilder) toObject(obj JSchema) (any, error) {
 			return nil, err
 		}
 		for k, v := range ps {
+			if _, ok := v["$ref"]; ok {
+				continue
+			}
 			p, err := j.gen(v)
 			if err != nil {
 				if j.opt.SkipError {
@@ -202,6 +205,9 @@ func (j *jsonschemaBuilder) toArray(obj JSchema) (any, error) {
 			}
 			return nil, err
 		}
+	}
+	if _, ok := items["$ref"]; ok {
+		return x, nil
 	}
 	min, max := j.rangeint(obj, 3, 10, "minItems", "maxItems")
 	n := randInt64(min, max)
