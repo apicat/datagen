@@ -155,7 +155,6 @@
             "Evanston"
           ]
         },
-        { "id": "District of Columbia" },
         { "id": "Washington", "citys": ["Spokane", "Tacoma", "Seattle"] },
         {
           "id": "California",
