@@ -61,6 +61,9 @@ func (j *jsonschemaBuilder) gen(obj JSchema) (any, error) {
 	case "integer", "number":
 		return j.toNumber(obj, jsType)
 	case "boolean":
+		if raw, ok := obj[j.opt.DatagenKey]; ok {
+			return CallFunction(j.rawString(raw)) == true, nil
+		}
 		return Boolean(), nil
 	case "null":
 		return nil, nil
