@@ -423,13 +423,13 @@ provinceorstate(zh) // 陕西省
 
 格式
 ```
-provinceorstate&city(lang?)
+provinceorstatecity(lang?)
 ```
 
 示例
 ```
-provinceorstate&city // Ogden, Utah
-provinceorstate&city(zh) // 陕西省 西安市
+provinceorstatecity // Ogden, Utah
+provinceorstatecity(zh) // 陕西省 西安市
 ```
 
 ## street
@@ -489,7 +489,7 @@ latitude // 39.916527
 
 示例
 ```
-longitude&latitude // 116.397128, 39.916527
+longitudelatitude // 116.397128, 39.916527
 ```
 
 ## 
