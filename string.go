@@ -2,6 +2,7 @@ package datagen
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"unicode"
 )
@@ -9,6 +10,10 @@ import (
 // String 生成字符串
 // mode
 func String(model string, n ...int) string {
+	i, err := strconv.Atoi(model)
+	if err == nil && i > 0 {
+		n = append([]int{i}, n...)
+	}
 	x := randCount(n...)
 	if x == -1 {
 		x = 10
