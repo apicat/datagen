@@ -21,6 +21,7 @@ string|{type?},{minlength?},{maxlength?}
 示例
 ```
 string // 随机长度的字符
+string|10,20
 string|number // 随机长度的数字
 string|letter,10  // 长度为10的小写字母
 string|letter,10,20  // 长度为10-20的小写字母
@@ -418,7 +419,7 @@ provinceorstate(zh) // 陕西省
 ```
 
 
-## provinceorstate&city
+## provinceorstatecity
 省/邦/州 市
 
 格式
@@ -484,7 +485,7 @@ latitude // 39.916527
 ```
 
 
-## longitude&latitude
+## longitudelatitude
 经纬度
 
 示例
