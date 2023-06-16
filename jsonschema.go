@@ -88,7 +88,7 @@ func (j *jsonschemaBuilder) toString(obj JSchema) (any, error) {
 		return j.stringFormat(j.rawString(raw)), nil
 	}
 	min, max := j.rangeint(obj, 5, 20, "minLength", "maxLength")
-	return String("ansic", int(min), int(max)), nil
+	return String("default", int(min), int(max)), nil
 }
 
 func (j *jsonschemaBuilder) stringFormat(format string) string {
